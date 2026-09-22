@@ -1,186 +1,140 @@
 <div align="center">
 
-<a href="https://player-two-site.vercel.app"><img src="docs/site-compose.jpg" alt="Player Two: I want to train a Unitree G1 to do a dumbbell shoulder press with curated video data" width="100%"></a>
+<a href="docs/brains-demo.mp4"><img src="docs/brains-title.jpg" alt="Player Two: teach a robot any task from videos of people doing it" width="100%"></a>
 
-# 🎮 Player Two
+# 🧠 Player Two
 
-### One sentence in. Robot demonstrations out.
+### A brain that teaches robots.
 
-[![1st place, Track 1](https://img.shields.io/badge/🏆_1st_place-Track_1_·_The_Executable_World_Hackathon-ffd700?style=for-the-badge&labelColor=0b1428)](https://luma.com/exruwpkp)
-
-**An AI agent that finds licensed video of people doing a task and turns it into<br>physics-checked training demonstrations for real robot models.**
+**Type one sentence. Player Two finds videos of real people doing the task, turns their motion into robot training data,<br>and remembers what worked for next time.**
 
 <br>
 
-[![Live demo](https://img.shields.io/badge/▶_Live_demo-player--two--site.vercel.app-7fb2ff?style=for-the-badge&labelColor=0b1428)](https://player-two-site.vercel.app)
-[![Demo video](https://img.shields.io/badge/🎬_Demo_video-49_seconds-ff5fa2?style=for-the-badge&labelColor=0b1428)](https://player-two-site.vercel.app/media/player-two-demo.mp4)
-[![Pitch deck](https://img.shields.io/badge/📽_Pitch_deck-11_slides-e9c46a?style=for-the-badge&labelColor=0b1428)](https://player-two-deck.vercel.app)
-[![Stack](https://img.shields.io/badge/🧱_The_stack-one_slide-7fe0b0?style=for-the-badge&labelColor=0b1428)](https://player-two-stack.vercel.app)
+[![Watch the demo](https://img.shields.io/badge/▶_Watch_the_demo-1:42-ff5fa2?style=for-the-badge&labelColor=0b1428)](docs/brains-demo.mp4)
+[![Live site](https://img.shields.io/badge/🌐_Live_site-player--two--site.vercel.app-7fb2ff?style=for-the-badge&labelColor=0b1428)](https://player-two-site.vercel.app)
 
-![MuJoCo](https://img.shields.io/badge/MuJoCo-3.13_WASM-2b5fb8?style=flat-square)
+![AWS Strands Agents](https://img.shields.io/badge/AWS-Strands_Agents-ff9900?style=flat-square)
+![Cognee](https://img.shields.io/badge/Cognee-memory-8b5cf6?style=flat-square)
+![Bright Data](https://img.shields.io/badge/Bright_Data-web_discovery-3d7eff?style=flat-square)
+![Docker Sandboxes](https://img.shields.io/badge/Docker-Sandboxes-2496ed?style=flat-square)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-Pose-00bfa5?style=flat-square)
-![LeRobot](https://img.shields.io/badge/LeRobot-v3.0-ffb000?style=flat-square)
-![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square)
-![Tests](https://img.shields.io/badge/tests-113_passing-3fb950?style=flat-square)
-![Tencent EdgeOne](https://img.shields.io/badge/Tencent-EdgeOne-0052d9?style=flat-square)
-![AWS](https://img.shields.io/badge/AWS-S3_+_CloudFront-ff9900?style=flat-square)
+![MuJoCo](https://img.shields.io/badge/MuJoCo-3.13_WASM-2b5fb8?style=flat-square)
 
-<sub>Built in one day at <a href="https://luma.com/exruwpkp">The Executable World: A Full Stack AI Hackathon</a>, San Francisco, 19 September 2026</sub>
+<sub>Built for <b>Battle of the Personal Brains</b> (Bright Data × Cognee × AWS × Docker), San Francisco, 21 September 2026</sub>
 
 </div>
 
 <br>
 
-## 👀 See it move
+## 💡 The problem
+
+Robots learn from demonstrations, and today people record every one of them by hand: data factories full of teleoperators, motion-capture suits, gig platforms. There is huge demand for good robot training data and almost no supply.
+
+Meanwhile TikTok and YouTube already hold billions of videos of people doing every task imaginable. **Player Two turns that footage into robot training data, and gets better at finding it every time it runs.**
 
 <table>
 <tr>
-<td width="50%" align="center"><img src="docs/demo-g1.gif" alt="A person doing a dumbbell shoulder press beside a Unitree G1 copying the motion" width="100%"><br><b>Unitree G1</b> · "do a dumbbell shoulder press"</td>
-<td width="50%" align="center"><img src="docs/demo-so101.gif" alt="A person raising one arm beside an SO-101 arm following the wrist" width="100%"><br><b>SO-101</b> · "raise one arm out to the side and lower it"</td>
+<td width="50%"><img src="docs/brains-headlines.jpg" alt="Real headlines about humans recording robot training data by hand"></td>
+<td width="50%"><img src="docs/brains-wall.jpg" alt="A wall of the real people behind 40 accepted demonstrations"></td>
+</tr>
+<tr>
+<td><sub>The problem, in the news: robot data is recorded by hand.</sub></td>
+<td><sub>The supply: 40 real people from our accepted clips, all Creative Commons.</sub></td>
 </tr>
 </table>
 
-<div align="center"><sub>Left of each clip: a Creative Commons video the agent found on its own. Right: the robot in MuJoCo, driven by that person's motion.</sub></div>
-
 <br>
 
-## 💡 Why
+## 🧠 How the brain works
 
-Robot foundation models are short of **demonstrations**, not architectures. Collecting them today means a person teleoperating a robot by hand, one episode at a time. Meanwhile the internet already holds millions of videos of people doing the exact tasks we want robots to learn.
-
-**Player Two turns that footage into robot training data, with no human in the loop.**
-
-<br>
-
-## ⚙️ How it works
+An **AWS Strands agent** drives four tools. It decides what to search for and in what order; the pipeline stays the judge of everything.
 
 ```mermaid
 flowchart LR
-    S(["💬 One sentence"]):::in --> A["1 · Sense check<br/><i>can this robot do it?</i>"]:::edge
-    A --> B["2 · Plan<br/><i>LLM: queries + motion signature</i>"]:::edge
-    B --> C["3 · Search<br/><i>licensed video only</i>"]:::web
-    C --> D["4 · Fetch + pose<br/><i>33 landmarks per frame</i>"]:::aws
-    D --> E["5 · Judge<br/><i>deterministic, most is rejected</i>"]:::sim
-    E --> F["6 · Retarget<br/><i>IK inside MuJoCo physics</i>"]:::sim
-    F --> G[("7 · LeRobot v3.0<br/>dataset + provenance")]:::aws
+    T(["💬 'train a Unitree G1<br/>to do a shoulder press'"]):::in --> A
+    subgraph Brain["🧠 Strands agent"]
+      A["1 · Recall<br/><i>Cognee</i><br/>what did past runs learn?"]:::mem --> B["2 · Discover<br/><i>Bright Data</i><br/>search the open web"]:::web
+      B --> C["3 · Build<br/><i>Docker sandbox · MediaPipe · MuJoCo</i>"]:::build
+      C --> D["4 · Remember<br/><i>Cognee</i><br/>store every outcome"]:::mem
+    end
+    D --> O[("🤖 robot demonstrations<br/>with source, licence, author")]:::out
+    D -. next run skips what failed .-> A
 
     classDef in fill:#eaf1ff,stroke:#7fb2ff,color:#05101f,stroke-width:2px
-    classDef edge fill:#7fb2ff,stroke:#2b5fb8,color:#05101f,stroke-width:2px
-    classDef web fill:#1b2540,stroke:#93a3c4,color:#eaf1ff,stroke-width:2px
-    classDef aws fill:#e9c46a,stroke:#b8860b,color:#1d1300,stroke-width:2px
-    classDef sim fill:#7fe0b0,stroke:#1f9d63,color:#04150d,stroke-width:2px
+    classDef mem fill:#b9a4ff,stroke:#6d4dff,color:#140a33,stroke-width:2px
+    classDef web fill:#7fb2ff,stroke:#2b5fb8,color:#05101f,stroke-width:2px
+    classDef build fill:#7fe0b0,stroke:#1f9d63,color:#04150d,stroke-width:2px
+    classDef out fill:#e9c46a,stroke:#b8860b,color:#1d1300,stroke-width:2px
 ```
 
-| | Step | What happens |
-|---|---|---|
-| 🧠 | **Sense check** | A one-arm SO-101 asked to do jumping jacks is refused before anything is searched, with a suggestion: switch to a humanoid, or ask for a one-arm motion. |
-| 📝 | **Plan** | An LLM writes search queries and a motion signature the judge can measure. Its output must match a JSON schema, unsupported claims are dropped, and a rule-based planner takes over if the model fails. |
-| 🔎 | **Search** | Creative Commons video only. The licence is re-checked from each video's own metadata. Bot checks and refusals are never worked around. |
-| 🕺 | **Fetch + pose** | MediaPipe Pose tracks the person in every frame. Footage that may not be redistributed is reduced to pose numbers and deleted. |
-| ⚖️ | **Judge** | Deterministic: framing, one continuous person, tracked frames, the planned motion and its direction. Most video is rejected. That is the product. |
-| 🤖 | **Retarget** | Numeric inverse kinematics maps human motion onto the robot's real kinematics inside MuJoCo. Episodes the robot followed for under 85% of the clip are dropped. |
-| 📦 | **Dataset** | LeRobot v3.0 episodes, written through the LeRobot library and loaded back as a check, with source, licence and author on every episode. |
+| | Tool | What it does in Player Two | Code |
+|---|---|---|---|
+| 🟧 | **AWS Strands Agents** | The harness. A Strands agent reads what memory recalled, writes the web searches, and calls the four tools in order. If the model is unreachable, the same steps run in a fixed order. | [`brain/agent.py`](brain/agent.py) |
+| 🟪 | **Cognee** | The memory. Every video outcome (accepted, rejected and why, or refused) and one lesson per run go into a Cognee knowledge graph. Before the next run, recall pulls them back so downloads that already failed for the same task and robot are skipped. | `recall()` · `remember()` |
+| 🟦 | **Bright Data** | The web. SERP searches find videos of people doing the task. Every lead still passes the Creative Commons licence gate and the footage judge. | `discover()` · [`search.ts`](scripts/agent/search.ts) |
+| 🟩 | **Docker Sandboxes** | The safety layer. Video from the internet is untrusted input, so it is decoded and pose-tracked inside a Docker sandbox that sees one folder. Only pose numbers come out. | [`fetch.ts`](scripts/agent/fetch.ts) |
+| 🟢 | **MediaPipe Pose** | The eyes. It tracks 33 points on the person's body in every frame; that motion drives the robot. | [`extract_pose.py`](scripts/extract_pose.py) |
+| 🔵 | **MuJoCo** | The body. Numeric inverse kinematics maps the motion onto a real robot model (Unitree G1, SO-101, Franka Panda) inside physics. | [`src/sim`](src/sim) |
+
+<img src="docs/brains-stack.jpg" alt="The four sponsor tools as they appear in the demo video" width="100%">
 
 <br>
 
-## 📊 A real run
-
-<div align="center">
-
-| 🔍 Found | ⬇️ Judged | ✅ Accepted | 📼 Episodes | ⏱ Time | 🙋 Humans |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| **68** | **36** | **22** | **22** | **16 min 46 s** | **0** |
-
-<sub>"Unitree G1, dumbbell shoulder press". Every number on the site comes from the run's own trace in <code>data/runs/</code>.</sub>
-
-</div>
-
-<br>
-
-## 🖥 The site
-
-**Type one sentence.** Pick a robot, describe the task, choose a data tier. The more specific you are, the better the training data.
+## 🖥 What it produces
 
 <table>
 <tr>
-<td width="50%"><img src="docs/site-sense-check.jpg" alt="The site refusing jumping jacks on an SO-101 and offering two fixes"><br><sub><b>It knows what a robot can do.</b> An SO-101 is one arm, so jumping jacks are refused with two one-click fixes.</sub></td>
-<td width="50%"><img src="docs/site-run.jpg" alt="The run timeline: plan, search, fetch and track, judge, retarget, write dataset"><br><sub><b>The run, step by step.</b> Plan, search, fetch and track, judge, retarget, write dataset.</sub></td>
+<td width="50%"><img src="docs/brains-library.jpg" alt="A recorded run: 68 videos found, 22 accepted, each clip a person beside the robot"></td>
+<td width="50%"><img src="docs/brains-goal.jpg" alt="A person tracked by MediaPipe with the Unitree G1 copying the motion"></td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/site-results.jpg" alt="A library of accepted clips, each a person beside a robot"><br><sub><b>A clip library</b> of every accepted episode: hover to peek and scrub, click to open.</sub></td>
-<td width="50%"><img src="docs/site-viewer.jpg" alt="Clip viewer with source, licence, author and measured stats"><br><sub><b>Provenance on every clip:</b> source, licence, author, frames tracked, lag, judge score.</sub></td>
+<td><sub>A recorded run: 68 videos found, 34 judged, 22 accepted, each clip a real person beside the robot.</sub></td>
+<td><sub>MediaPipe tracks the person; the Unitree G1 follows in physics.</sub></td>
 </tr>
 </table>
 
-<img src="docs/gallery.jpg" alt="Six accepted clips: people on the left, the G1 and SO-101 on the right" width="100%">
+Every episode keeps where it came from: source, licence, author, how closely the robot followed, and the judge's score.
 
 <br>
 
-## 🧱 The stack
-
-<a href="https://player-two-stack.vercel.app"><img src="docs/stack.jpg" alt="The whole Player Two stack on one slide" width="100%"></a>
-
-| Layer | What | Status |
-|---|---|---|
-| 🟦 **Model** | Planner LLM served from **Tencent EdgeOne** edge functions, site on EdgeOne Pages | 🔜 moving next (today: Gemini, called server-side) |
-| 🟨 **Storage** | All footage, pose tracks, clips and datasets in **AWS S3** behind CloudFront | 🔜 moving next (today: local disk) |
-| 🟩 **Perception** | MediaPipe Pose, zero-phase smoothing, resampled to 50 Hz | ✅ built |
-| 🟩 **Physics** | MuJoCo 3.13 WASM, same simulation in browser and Node, server replays every episode | ✅ built |
-| 🟩 **Retargeting** | Levenberg-Marquardt IK, one retargeter per embodiment | ✅ built |
-| 🟩 **Output** | LeRobot v3.0 with per-episode provenance | ✅ built |
-| ⬜ **Frontend** | Next.js 16 app (operator page, dataset wall, live agent page) plus a static public site | ✅ built |
-
-<br>
-
-## 🤖 Robots
-
-| | Robot | Model | How it follows a person |
-|---|---|---|---|
-| 🦿 | **Unitree G1** | MuJoCo Menagerie | Arms, legs and pelvis. Legs are held when the person is seated. |
-| 🦾 | **SO-101** | TheRobotStudio official MJCF | One human wrist, relative to the shoulder and scaled to the arm's workspace, drives the gripper position. |
-| 🦾 | **Franka Panda** | MuJoCo Menagerie | Same mapping. Its real 2.175 rad/s limit decides what footage it can follow. |
-
-<br>
-
-## 🚀 Quick start
+## 🚀 Run it
 
 ```bash
 pnpm install
-pnpm dev --port 3218          # operator page at /, dataset wall at /wall, agent at /agent
 
-# run the agent: a task in plain words in, a traceable set of demonstrations out
-pnpm dlx tsx scripts/agent/agent.mts "dumbbell shoulder press" --robot g1 \
-  --max-videos 70 --target-accepted 22 --seconds 6 --sources youtube-cc
+# the sandbox that decodes video (Docker Desktop must be running)
+docker sandbox create --name p2-pose shell "$PWD/data/sandbox" "$PWD/scripts:ro"
 
-pnpm test                     # 113 tests against real MuJoCo
+# keys come from the environment (or the macOS keychain), never from a file
+export COGNEE_API_KEY=...        # Cognee Cloud
+export BRIGHTDATA_API_KEY=...    # Bright Data (SERP zone serp_api1)
+export GEMINI_API_KEY=...        # the model behind the Strands agent
+
+# one sentence in, robot demonstrations out
+uv run brain/agent.py "dumbbell shoulder press" --robot g1 --sandbox p2-pose --target-accepted 22
 ```
 
-The planner reads `GEMINI_API_KEY` from the environment. Without one it falls back to a rule-based plan. Pose extraction needs `uv` and `yt-dlp`.
-
-📚 **Full technical reference:** [docs/REFERENCE.md](docs/REFERENCE.md) (gates, agent internals, feasibility rules, embodiments, export)
+Each run writes `data/runs/<id>/run.json` (every candidate, verdict and episode), `brain.json` (what the brain did, step by step) and `REPORT.md`. Needs `uv`, `pnpm`, `yt-dlp` and `ffmpeg`. The full technical reference is in [docs/REFERENCE.md](docs/REFERENCE.md).
 
 <br>
 
-## 🧭 Honest limits
+## 🧭 Honest status
 
-- The output is **kinematic demonstrations**. No policy is trained yet.
-- The **gripper never closes** from video. Body pose alone cannot tell an open hand from a fist; that needs hand tracking.
-- Wrist orientation is not retargeted. Depth from a single camera is the noisy axis.
-- The G1's pelvis is a kinematic root: it follows the person, it is not balanced by a controller.
-- The live webcam path has not been tested with a real camera in a room yet.
+- **Ran end to end:** the Strands agent driving all four tools, the Docker sandbox (every video in the test runs was decoded inside it), MediaPipe tracking, the footage judge and the MuJoCo retargeting.
+- **Built and wired, not yet live:** during the event the Cognee calls were rejected (the API key we had did not authenticate) and the Bright Data account was suspended pending billing, so memory and web discovery did not contribute to the recorded runs. The code paths are complete, and the agent carries on without them rather than failing.
+- The output is kinematic demonstrations; no robot policy is trained yet. The gripper cannot close from body pose alone.
 
 <br>
 
-## 📜 Credits and licences
+## 📜 Credits
 
-Robot models: [Unitree G1](vendor/unitree_g1/LICENSE) and [Franka Panda](vendor/franka_emika_panda/LICENSE) from MuJoCo Menagerie, [SO-101](vendor/so101/LICENSE) from TheRobotStudio. Every source video shown is Creative Commons (CC BY), with its author and link recorded in the run trace and shown in the clip viewer.
+Player Two was first built at [The Executable World hackathon](https://luma.com/exruwpkp) (1st place, Track 1, 19 September 2026; that README is in [docs/EXECUTABLE-WORLD-README.md](docs/EXECUTABLE-WORLD-README.md)). For Battle of the Personal Brains we added the brain: the Strands agent, Cognee memory, Bright Data discovery and the Docker sandbox.
+
+Robot models: Unitree G1 and Franka Panda from MuJoCo Menagerie, SO-101 from TheRobotStudio (licences in `vendor/`). Every source video shown is Creative Commons, with its author and link kept in the run trace. News screenshots in the demo are from their publishers and used for commentary.
 
 <div align="center">
 <br>
 
-**Built by [Pranav Achar](https://github.com/PranavAchar01) and [Nithin Aruswamy](https://github.com/nithinaru)**
-
-[![Try the live demo](https://img.shields.io/badge/Try_the_live_demo_→-7fb2ff?style=for-the-badge&labelColor=0b1428)](https://player-two-site.vercel.app)
+**Built by [Pranav Achar](https://github.com/PranavAchar01)**
 
 </div>
