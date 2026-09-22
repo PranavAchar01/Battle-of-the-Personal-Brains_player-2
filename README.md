@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="docs/brains-demo.mp4"><img src="docs/brains-title.jpg" alt="Player Two: teach a robot any task from videos of people doing it" width="100%"></a>
+<a href="https://player-two-video.vercel.app"><img src="docs/brains-title.jpg" alt="Player Two: teach a robot any task from videos of people doing it" width="100%"></a>
 
 # 🧠 Player Two
 
@@ -10,7 +10,7 @@
 
 <br>
 
-[![Watch the demo](https://img.shields.io/badge/▶_Watch_the_demo-1:42-ff5fa2?style=for-the-badge&labelColor=0b1428)](docs/brains-demo.mp4)
+[![Watch the demo](https://img.shields.io/badge/▶_Watch_the_demo-1:42-ff5fa2?style=for-the-badge&labelColor=0b1428)](https://player-two-video.vercel.app)
 [![Live site](https://img.shields.io/badge/🌐_Live_site-player--two--site.vercel.app-7fb2ff?style=for-the-badge&labelColor=0b1428)](https://player-two-site.vercel.app)
 
 ![AWS Strands Agents](https://img.shields.io/badge/AWS-Strands_Agents-ff9900?style=flat-square)
