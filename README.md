@@ -6,6 +6,8 @@
 
 ### A brain that teaches robots.
 
+[![2nd place](https://img.shields.io/badge/🥈_2nd_place-Battle_of_the_Personal_Brains_·_SF_·_Sep_21_2026-c0c0c0?style=for-the-badge&labelColor=0b1428)](https://luma.com/sep-21-cognee-aws)
+
 **Type one sentence. Player Two finds videos of real people doing the task, turns their motion into robot training data,<br>and remembers what worked for next time.**
 
 <br>
